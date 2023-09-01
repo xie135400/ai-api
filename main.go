@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	gpt := utils.NewChatGptTool("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")
+	gpt := utils.NewChatGptTool("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")
 	message := []utils.Gpt3Dot5Message{
 		{
 			Role:    "system",
