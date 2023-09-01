@@ -2,10 +2,11 @@ package main
 
 import (
 	"log"
+	"testing"
 )
 
-func main() {
-	gpt := NewChatGptTool("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")
+func TestChatGPT3Dot5Turbo(t *testing.T) {
+	gpt := NewChatGptTool("你的Key")
 	message := []Gpt3Dot5Message{
 		{
 			Role:    "system",
