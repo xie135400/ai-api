@@ -13,7 +13,7 @@ import (
 func main() {
 	http.HandleFunc("/v1/chat/completions", HttpPost)
 
-	fmt.Println("Server listening on port 8080...")
+	fmt.Println("Server listening on port 8089...")
 	err := http.ListenAndServe("0.0.0.0:8089", nil)
 	log.Println(err)
 }
@@ -26,24 +26,24 @@ func HttpPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(w, "请求体内容：%s", string(body))
-	//	str := `{
-	//    "model": "gpt-3.5-turbo",
-	//    "messages": [
-	//
-	//        {
-	//            "role": "user",
-	//            "content": "你知道劲舞团这个游戏吗？"
-	//        },{
-	//            "role": "user",
-	//            "content": "那么怎么玩好这个游戏呢？"
-	//        }
-	//    ],
-	//    "top_p":0.8,
-	//    "stream":true
-	//}`
+	fmt.Println("请求体内容：", string(body))
+	str := `{
+	   "model": "gpt-3.5-turbo",
+	   "messages": [
+	
+	       {
+	           "role": "user",
+	           "content": "你知道劲舞团这个游戏吗？"
+	       },{
+	           "role": "user",
+	           "content": "那么怎么玩好这个游戏呢？"
+	       }
+	   ],
+	   "top_p":0.8,
+	   "stream":true
+	}`
 	data := make(map[string]interface{})
-	_ = json.Unmarshal(body, &data)
+	_ = json.Unmarshal([]byte(str), &data)
 	dataByte, err := json.Marshal(data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
