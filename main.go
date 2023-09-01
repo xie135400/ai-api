@@ -57,7 +57,7 @@ func HttpPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer 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")
+	req.Header.Set("Authorization", "Bearer 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")
 	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err = client.Do(req)
 	if err != nil {
