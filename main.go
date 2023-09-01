@@ -91,11 +91,7 @@ func main() {
 	str := `{
 	   "model": "gpt-3.5-turbo",
 	   "messages": [
-	
-	       {
-	           "role": "user",
-	           "content": "你知道劲舞团这个游戏吗？"
-	       },{
+			{
 	           "role": "user",
 	           "content": "那么怎么玩好这个游戏呢？"
 	       }
@@ -119,7 +115,7 @@ func main() {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer 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")
-	client := &http.Client{Timeout: 10 * time.Second}
+	client := &http.Client{Timeout: 30 * time.Second}
 	resp, err = client.Do(req)
 	if err != nil {
 		log.Println(err)
@@ -130,16 +126,11 @@ func main() {
 		log.Println(resp.StatusCode)
 		return
 	}
-	for {
-		body, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			fmt.Println("读取HTTP响应失败：", err)
-			return
-		}
-		if len(body) == 0 {
-			break
-		}
-		fmt.Print(string(body))
+	body, _ := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err)
+		return
 	}
+	log.Println(string(body))
 	return
 }
